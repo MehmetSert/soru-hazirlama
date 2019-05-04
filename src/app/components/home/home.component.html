@@ -1,125 +1,141 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-4">
-      <mat-accordion>
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title>Okul - Ders Bilgileri</mat-panel-title>
-            <mat-panel-description>Buraya tıkla ve doldur.</mat-panel-description>
-          </mat-expansion-panel-header>
-          <div class="accordion-content">
-            <form [formGroup]="form">
-              <mat-form-field>
-                <input matInput placeholder="Okul adı" formControlName="schoolName">
-              </mat-form-field>
-              <mat-form-field>
-                <input matInput placeholder="Ders adı" formControlName="lessonName">
-              </mat-form-field>
-              <mat-form-field>
-                <input matInput placeholder="Sınav adı Örn: 1. Dönem 1. Çoktan Seçmeli Test Sınavı" formControlName="examName">
-              </mat-form-field>
-              <div class="row">
-                <div class="col-md-6">
-                  <mat-form-field>
-                    <input matInput placeholder="Sınıf-Şube" formControlName="classBranch">
-                  </mat-form-field>
-                </div>
-                <div class="col-md-6">
-                  <mat-form-field>
-                    <input matInput placeholder="Eğitim - Öğretim yılı" formControlName="academicYear">
-                  </mat-form-field>
-                </div>
-              </div>
-            </form>
-          </div>
-        </mat-expansion-panel>
-      </mat-accordion>
-      <mat-card class="m-t-15">
-        <form [formGroup]="questionForm">
-          <mat-form-field>
-            <textarea matInput placeholder="{{ questions.length + 1 }}. Soru" formControlName="question"></textarea>
-          </mat-form-field>
-          <mat-form-field>
-            <textarea matInput placeholder="{{ questions.length + 1 }}. Soru üst metni (isteğe bağlı)" formControlName="questionTop"></textarea>
-          </mat-form-field>
-          <div class="row">
-            <div class="col-md-6">
-              <mat-form-field>
-                <mat-label>Cevap modeli</mat-label>
-                <mat-select formControlName="answerModel">
-                  <mat-option value="0">Klasik</mat-option>
-                  <mat-option value="1">Çoktan seçmeli</mat-option>
-                  <mat-option value="2">Doğru - Yanlış</mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
-            <div class="col-md-3">
-              <mat-form-field>
-                <input matInput type="number" placeholder="Boyut" formControlName="fontSize" min="6" max="15">
-              </mat-form-field>
-            </div>
-            <div class="col-md-3">
-              <mat-form-field>
-                <input matInput type="number" placeholder="Sütun" formControlName="column" min="1" max="2">
-              </mat-form-field>
-            </div>
-          </div>
-          <div class="row align-items-center" *ngIf="questionForm.get('answerModel').value != 0">
-            <ng-container formArrayName="answers" *ngFor="let item of questionForm.get('answers')['controls']; let i = index">
-              <div class="col-md-10" [formGroupName]="i">
+    <div class="col-md-4 left">
+      <div class="left-content">
+        <mat-accordion>
+          <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>Okul - Ders Bilgileri</mat-panel-title>
+              <mat-panel-description>Bu alanı küçültebilirsiniz.</mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="accordion-content">
+              <form [formGroup]="form">
                 <mat-form-field>
-                  <input matInput placeholder="Şık" formControlName="answer">
-                  <span class="m-r-10" matPrefix>{{ questionForm.get('answerModel').value == 1 ? letters[i] : '( )' }}</span>
+                  <input matInput placeholder="Okul adı" formControlName="schoolName">
+                </mat-form-field>
+                <mat-form-field>
+                  <input matInput placeholder="Ders adı" formControlName="lessonName">
+                </mat-form-field>
+                <mat-form-field>
+                  <input matInput placeholder="Sınav adı Örn: 1. Dönem 1. Çoktan Seçmeli Test Sınavı" formControlName="examName">
+                </mat-form-field>
+                <div class="row">
+                  <div class="col-md-6">
+                    <mat-form-field>
+                      <input matInput placeholder="Sınıf-Şube" formControlName="classBranch">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6">
+                    <mat-form-field>
+                      <input matInput placeholder="Eğitim - Öğretim yılı" formControlName="academicYear">
+                    </mat-form-field>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+        <mat-card class="m-t-15">
+          <form [formGroup]="questionForm">
+            <mat-form-field>
+              <textarea matInput placeholder="{{ questions.length + 1 }}. Soruyu yazınız" formControlName="question" #question></textarea>
+            </mat-form-field>
+            <mat-form-field>
+              <textarea matInput placeholder="{{ questions.length + 1 }}. Soru üst metni (isteğe bağlı)" formControlName="questionTop"></textarea>
+            </mat-form-field>
+            <div class="row">
+              <div class="col-md-6">
+                <mat-form-field>
+                  <mat-label>Cevap modeli</mat-label>
+                  <mat-select formControlName="answerModel">
+                    <mat-option value="0">Klasik</mat-option>
+                    <mat-option value="1">Çoktan seçmeli</mat-option>
+                    <mat-option value="2">Doğru - Yanlış</mat-option>
+                  </mat-select>
                 </mat-form-field>
               </div>
-              <div class="col-md-2">
-                <button mat-icon-button color="warn" type="button" (click)="removeAnswer(i)"><mat-icon>delete</mat-icon></button>
+              <div class="col-md-3">
+                <mat-form-field>
+                  <input matInput type="number" placeholder="Boyut" formControlName="fontSize" min="6" max="15">
+                </mat-form-field>
               </div>
-            </ng-container>
-            <div class="col-md-12 text-center m-b-15">
-              <button mat-stroked-button color="accent" (click)="addAnswer()">Şık ekle</button>
+            </div>
+            <div class="row align-items-center" *ngIf="questionForm.get('answerModel').value != 0">
+              <ng-container formArrayName="answers" *ngFor="let item of questionForm.get('answers')['controls']; let i = index">
+                <div class="col-md-10" [formGroupName]="i">
+                  <mat-form-field>
+                    <input matInput placeholder="Şık" formControlName="answer">
+                    <span class="m-r-10" matPrefix>{{ questionForm.get('answerModel').value == 1 ? letters[i] : '( )' }}</span>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-2">
+                  <button mat-icon-button color="warn" type="button" (click)="removeAnswer(i)"><mat-icon>delete</mat-icon></button>
+                </div>
+              </ng-container>
+              <div class="col-md-12 text-center m-b-15">
+                <button mat-stroked-button color="accent" (click)="addAnswer()">Şık ekle</button>
+              </div>
+            </div>
+            <button mat-raised-button color="primary" type="submit" (click)="addQuestion()">Soruyu ekle</button>
+          </form>
+        </mat-card>
+        <div class="designer">
+          <a href="https://limantech.com" target="_blank" matTooltip="Sınav sorularını hazırlarken öğretmenlerimize bir nebze faydamız dokunduysa ne mutlu bize :)" matTooltipClass="tooltip-14"><img src="https://www.limantech.com/icon.svg"></a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8 paper-print">
+      <div class="paper-content">
+        <div class="paper-column">
+          <mat-button-toggle-group class="toggle-xs" name="column" aria-label="Sütun" #column="matButtonToggleGroup" value="2" (change)="changeColumn()">
+            <mat-button-toggle value="1" matTooltip="Bir satırda 1 soru görünür.">Tek sütun</mat-button-toggle>
+            <mat-button-toggle value="2" matTooltip="Bir satırda 2 soru görünür.">2 sütun</mat-button-toggle>
+          </mat-button-toggle-group>
+          <small class="f-size-12">Düzeltmek istediğiniz soruları veya şıkları üzerine tıklayarak düzenleyebilirsiniz.</small>
+        </div>
+        <section class="paper">
+          <h6 class="paper-title">
+            {{ form.get('academicYear').value !== '' ? form.get('academicYear').value + ' EĞİTİM - ÖĞRETİM YILI' : '' }}
+            {{ form.get('schoolName').value !== '' ? form.get('schoolName').value : '' }}
+            {{ form.get('classBranch').value !== '' ? form.get('classBranch').value + ' SINIFI' : '' }}
+            {{ form.get('lessonName').value !== '' ? form.get('lessonName').value : '' }}
+            {{ form.get('examName').value !== '' ? form.get('examName').value : '' }}
+          </h6>
+          <div class="point-content">
+            <div class="point-content-left">
+              <strong contenteditable="true">AD SOYAD:</strong>
+              <strong contenteditable="true">NUMARA:</strong>
+            </div>
+            <div class="point-content-right">
+              <strong contenteditable="true">PUAN:</strong>
             </div>
           </div>
-          <button mat-raised-button color="primary" type="submit" (click)="addQuestion()">Soruyu ekle</button>
-        </form>
-      </mat-card>
-    </div>
-    <div class="col-md-8">
-      <section class="paper">
-        <h6 class="paper-title">
-          {{ form.get('academicYear').value !== '' ? form.get('academicYear').value + ' EĞİTİM - ÖĞRETİM YILI' : '' }}
-          {{ form.get('schoolName').value !== '' ? form.get('schoolName').value : '' }}
-          {{ form.get('classBranch').value !== '' ? form.get('classBranch').value + ' SINIFI' : '' }}
-          {{ form.get('lessonName').value !== '' ? form.get('lessonName').value : '' }}
-          {{ form.get('examName').value !== '' ? form.get('examName').value : '' }}
-        </h6>
-        <div class="point-content">
-          <div class="left">
-            <strong contenteditable="true">AD SOYAD:</strong>
-            <strong contenteditable="true">NUMARA:</strong>
-          </div>
-          <div class="right">
-            <strong contenteditable="true">PUAN:</strong>
-          </div>
-        </div>
-        <div class="questions">
-          <ng-container *ngFor="let question of questions; let i = index">
-            <div class="question column-{{ question.column }} size-{{ question.fontSize }} m-b-20" [class.m-b-50]="question.answerModel === '0'">
-              <div class="question-buttons">
-                <button mat-icon-button color="warn" (click)="removeQuestion(question)"><mat-icon>delete</mat-icon></button>
-              </div>
-              <span class="d-block pre-wrap m-b-5" contenteditable="true">{{ question.questionTop }}</span>
-              <span class="question-title" contenteditable="true">{{ i+1 }}-) {{ question.question }}</span>
-              <div class="answers" *ngIf="question.answerModel !== '0'">
-                <div class="answer" *ngFor="let answer of question.answers; let a = index">
-                  <span class="d-block" contenteditable="true">{{ question.answerModel === '1' ? letters[a] + '-) ' : '( ... )' }} {{ answer.answer }}</span>
+          <div class="questions">
+            <ng-container *ngFor="let question of questions; let i = index">
+              <div class="question column-{{ column.value }} size-{{ question.fontSize }} m-b-20" [class.m-b-50]="question.answerModel === '0'">
+                <div class="question-buttons">
+                  <button mat-icon-button color="warn" (click)="removeQuestion(question)" matTooltip="Soruyu sil"><mat-icon>delete</mat-icon></button>
+                </div>
+                <span class="d-block pre-wrap m-b-5" contenteditable="true">{{ question.questionTop }}</span>
+                <span class="question-title pre-wrap" contenteditable="true">{{ i+1 }}-) {{ question.question }}</span>
+                <div class="answers" *ngIf="question.answerModel !== '0'">
+                  <div class="answer" *ngFor="let answer of question.answers; let a = index">
+                    <span class="d-block" contenteditable="true">{{ question.answerModel === '1' ? letters[a] + '-) ' : '( ... )' }} {{ answer.answer }}</span>
+                  </div>
                 </div>
               </div>
-            </div>
-          </ng-container>
+            </ng-container>
+          </div>
+        </section>
+      </div>
+      <div class="right">
+        <div class="right-content">
+          <button mat-flat-button color="primary" class="m-b-15" (click)="done()" matTooltip="Direkt yazıcıya gönderebilirsiniz veya 'Hedef' bölümünü değiştirip 'PDF Kaydet' seçeneğini seçip kaydedebilirsiniz." matTooltipClass="tooltip-13">KAYDET VEYA YAZDIR</button>
+          <section class="google-160x600">
+
+          </section>
         </div>
-      </section>
-      <section class="google-160x600"></section>
+      </div>
     </div>
   </div>
 </div>

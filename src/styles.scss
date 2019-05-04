@@ -4,68 +4,84 @@
 body {
   background-color: #f7f7f7;
   padding: 15px 10px;
-}
-
-.paper {
-  background-color: #fff;
-  width: 595px;
-  height: 842px;
-  display: inline-block;
-  box-shadow: 0 0 20px -3px rgba(0, 0, 0, 0.25);
-  padding: 55px;
-  font-size: 10pt;
-  vertical-align: top;
-  .paper-title {
-    font-size: 10pt;
-    text-align: center;
-    font-weight: bold;
-  }
-  .point-content {
-    display: flex;
-    justify-content: space-between;
-    padding: 15px 100px 30px 0;
-    .left,
-    .right {
-      strong {
-        display: block;
-      }
+  button {
+    &:focus {
+      box-shadow: none;
+      outline: none;
     }
   }
-  .questions {
-    .question {
-      display: inline-block;
-      vertical-align: top;
-      position: relative;
-      .question-title {
-        display: block;
-        width: 100%;
-        margin-bottom: 5px;
-        font-weight: bold;
+}
+
+.paper-content {
+  width: 625px;
+  display: inline-block;
+  .paper-column {
+    text-align: center;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .paper {
+    background-color: #fff;
+    box-shadow: 0 0 20px -3px rgba(0, 0, 0, 0.25);
+    padding: 55px;
+    font-size: 10pt;
+    vertical-align: top;
+    overflow-x: scroll;
+    height: calc(100vh - 59px);
+    .paper-title {
+      font-size: 10pt;
+      text-align: center;
+      font-weight: bold;
+    }
+    .point-content {
+      display: flex;
+      justify-content: space-between;
+      padding: 15px 100px 30px 0;
+      .point-content-left,
+      .point-content-right {
+        strong {
+          display: block;
+        }
       }
-      .question-buttons {
-        opacity: 0;
-        visibility: hidden;
-        position: absolute;
-        left: -45px;
-        top: 10px;
-        transition: .3s;
-      }
-      &.column-1 { width: 100%; }
-      &.column-2 { width: 50%; }
-      &.size-6 { font-size: 6pt; .answer span { font-size: 7pt; } }
-      &.size-7 { font-size: 7pt; .answer span { font-size: 8pt; } }
-      &.size-8 { font-size: 8pt; .answer span { font-size: 9pt; } }
-      &.size-9 { font-size: 9pt; .answer span { font-size: 10pt; } }
-      &.size-10 { font-size: 10pt; .answer span { font-size: 11pt; } }
-      &.size-11 { font-size: 11pt; .answer span { font-size: 12pt; } }
-      &.size-12 { font-size: 12pt; .answer span { font-size: 13pt; } }
-      &.size-13 { font-size: 13pt; .answer span { font-size: 14pt; } }
-      &.size-14 { font-size: 14pt; .answer span { font-size: 15pt; } }
-      &.size-15 { font-size: 15pt; .answer span { font-size: 16pt; } }
-      &:hover {
+    }
+    .questions {
+      .question {
+        display: inline-block;
+        vertical-align: top;
+        position: relative;
+        .question-title {
+          display: block;
+          width: 100%;
+          margin-bottom: 5px;
+          font-weight: bold;
+        }
         .question-buttons {
-          opacity: 1;
-          visibility: visible;
+          opacity: 0;
+          visibility: hidden;
+          position: absolute;
+          left: -45px;
+          top: 10px;
+          transition: .3s;
+        }
+        &.column-1 { width: 100%; }
+        &.column-2 { width: 50%; }
+        &.size-6 { font-size: 6pt; .answer span { font-size: 7pt; } }
+        &.size-7 { font-size: 7pt; .answer span { font-size: 8pt; } }
+        &.size-8 { font-size: 8pt; .answer span { font-size: 9pt; } }
+        &.size-9 { font-size: 9pt; .answer span { font-size: 10pt; } }
+        &.size-10 { font-size: 10pt; .answer span { font-size: 11pt; } }
+        &.size-11 { font-size: 11pt; .answer span { font-size: 12pt; } }
+        &.size-12 { font-size: 12pt; .answer span { font-size: 13pt; } }
+        &.size-13 { font-size: 13pt; .answer span { font-size: 14pt; } }
+        &.size-14 { font-size: 14pt; .answer span { font-size: 15pt; } }
+        &.size-15 { font-size: 15pt; .answer span { font-size: 16pt; } }
+        &:hover {
+          .question-buttons {
+            opacity: 1;
+            visibility: visible;
+          }
         }
       }
     }
@@ -76,18 +92,44 @@ body {
   width: 100%;
 }
 
-.google-160x600 {
-  width: 160px;
-  height: 600px;
-  background-color: #d2d2d2;
+.right {
   display: inline-block;
-  margin-left: 55px;
+  margin-left: 20px;
   vertical-align: top;
+  .right-content {
+    .google-160x600 {
+      width: 160px;
+      height: 600px;
+      background-color: #d2d2d2;
+      margin: 0 auto;
+    }
+  }
 }
 
 .pre-wrap {
   white-space: pre-wrap;
 }
+
+.toggle-xs {
+  .mat-button-toggle {
+    background-color: rgba(62, 81, 181, 0.2);
+    .mat-button-toggle-button {
+      .mat-button-toggle-label-content {
+        line-height: 26px;
+        font-size: 12px;
+      }
+    }
+    &.mat-button-toggle-checked {
+      background-color: #ff4081;
+      color: #fff;
+    }
+  }
+}
+
+.f-size-12 { font-size: 12px; }
+
+.tooltip-13 { font-size: 13px; }
+.tooltip-14 { font-size: 14px; }
 
 
 $spaceamounts: (0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100, 105, 110, 115, 120, 125, 130, 135, 140, 145, 150, 155, 160, 165, 170, 175, 180, 185, 190, 195, 200); // Adjust this to include the pixel amounts you need.
@@ -113,3 +155,48 @@ $sides: (top, bottom, left, right); // Leave this variable alone
   }
 }
 
+@media print {
+  @page {  margin: 0mm; }
+  .left,
+  .right {
+    display: none;
+  }
+  .paper-print {
+    width: 100%!important;
+    max-width: 100%!important;
+    flex: 0 0 100%!important;
+  }
+  .paper-content {
+    width: 100%;
+    .paper-column {
+      display: none;
+    }
+    .paper {
+      width: 100%;
+      min-height: auto;
+      box-shadow: none;
+      font-size: inherit;
+      overflow: hidden;
+      height: 100%;
+      .paper-title {
+        font-size: 16pt;
+      }
+    }
+  }
+}
+
+.designer {
+  text-align: center;
+  padding-top: 15px;
+  a {
+    img {
+      width: 30px;
+      transition: .3s;
+    }
+    &:hover {
+      img {
+        transform: scale(1.1);
+      }
+    }
+  }
+}

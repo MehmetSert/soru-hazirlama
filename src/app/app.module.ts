@@ -9,7 +9,11 @@ import {
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
-  MatSelectModule
+  MatSelectModule,
+  MatTooltipModule,
+  MatRadioModule,
+  MatButtonToggleModule,
+  MatSnackBarModule
 } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -35,7 +39,11 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     MatSelectModule,
     MatCardModule,
     MatExpansionModule,
-    MatIconModule
+    MatIconModule,
+    MatTooltipModule,
+    MatRadioModule,
+    MatButtonToggleModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
