@@ -38,7 +38,7 @@
         <mat-card class="m-t-15">
           <form [formGroup]="questionForm">
             <mat-form-field>
-              <textarea matInput placeholder="{{ questions.length + 1 }}. Soruyu yazınız" formControlName="question" #question></textarea>
+              <textarea matInput placeholder="{{ questions.length + 1 }}. Soruyu yazınız" formControlName="question" #question autofocus></textarea>
             </mat-form-field>
             <mat-form-field>
               <textarea matInput placeholder="{{ questions.length + 1 }}. Soru üst metni (isteğe bağlı)" formControlName="questionTop"></textarea>
@@ -54,9 +54,9 @@
                   </mat-select>
                 </mat-form-field>
               </div>
-              <div class="col-md-3">
+              <div class="col-md-4">
                 <mat-form-field>
-                  <input matInput type="number" placeholder="Boyut" formControlName="fontSize" min="6" max="15">
+                  <input matInput type="number" placeholder="Yazı boyutu" formControlName="fontSize" min="6" max="15">
                 </mat-form-field>
               </div>
             </div>
@@ -64,7 +64,7 @@
               <ng-container formArrayName="answers" *ngFor="let item of questionForm.get('answers')['controls']; let i = index">
                 <div class="col-md-10" [formGroupName]="i">
                   <mat-form-field>
-                    <input matInput placeholder="Şık" formControlName="answer">
+                    <input matInput placeholder="Şık" formControlName="answer" autofocus>
                     <span class="m-r-10" matPrefix>{{ questionForm.get('answerModel').value == 1 ? letters[i] : '( )' }}</span>
                   </mat-form-field>
                 </div>

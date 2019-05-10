@@ -22,9 +22,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit() {
-    if (localStorage.getItem('questions')) {
-      this.questions = JSON.parse(localStorage.getItem('questions'));
-    }
+    /*if (localStorage.getItem('questions')) {
+      if (confirm('En son hazırlanmış sorular üzerinden devam etmek ister misiniz?')) {
+        this.questions = JSON.parse(localStorage.getItem('questions'));
+      }
+    }*/
     this.form = this.fb.group({
       schoolName: '',
       lessonName: '',
@@ -65,9 +67,19 @@ export class HomeComponent implements OnInit, AfterViewInit {
       }
       this.question.nativeElement.focus();
     } else {
-      this.snackBar.open('Boş soru ekleyemezsiniz.', null, {
-        duration: 600,
-      });
+      if (this.questionForm.get('question').invalid) {
+        this.snackBar.open('Boş soru ekleyemezsiniz.', null, {
+          duration: 600,
+        });
+      } else if (this.questionForm.get('fontSize').invalid) {
+        this.snackBar.open('Yazı boyutu 6 ile 15 arasında olmalıdır.', null, {
+          duration: 600,
+        });
+      } else {
+        this.snackBar.open('Lütfen gerekli alanları doldurunuz.', null, {
+          duration: 600,
+        });
+      }
     }
   }
 

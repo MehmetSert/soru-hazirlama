@@ -158,7 +158,8 @@ $sides: (top, bottom, left, right); // Leave this variable alone
 @media print {
   @page {  margin: 0mm; }
   .left,
-  .right {
+  .right,
+  .tooltip-13 {
     display: none;
   }
   .paper-print {
