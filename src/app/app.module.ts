@@ -15,6 +15,7 @@ import {
   MatButtonToggleModule,
   MatSnackBarModule
 } from '@angular/material';
+import {EditorModule} from 'primeng/editor';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -43,7 +44,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     MatTooltipModule,
     MatRadioModule,
     MatButtonToggleModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    EditorModule
   ],
   providers: [],
   bootstrap: [AppComponent]
