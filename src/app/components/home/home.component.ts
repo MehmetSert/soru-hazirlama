@@ -1,6 +1,8 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatSnackBar} from '@angular/material';
+import IntroJs from '../../../../node_modules/intro.js/intro.js';
+import {DOCUMENT} from "@angular/common";
 
 @Component({
   selector: 'app-home',
@@ -18,7 +20,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   constructor(
     private fb: FormBuilder,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private el: ElementRef,
+    @Inject(DOCUMENT) private document: Document
   ) { }
 
   ngOnInit() {
@@ -42,6 +46,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
     if (localStorage.getItem('column')) {
       this.column.value = localStorage.getItem('column');
     }
+    setTimeout(() => {
+      this.setIntro();
+    }, 1000);
   }
 
   questionFormReset() {
@@ -65,7 +72,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
           duration: 5000,
         });
       }
-      this.question.nativeElement.focus();
     } else {
       if (this.questionForm.get('question').invalid) {
         this.snackBar.open('Boş soru ekleyemezsiniz.', null, {
@@ -89,7 +95,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   createAnswer() {
     return this.fb.group({
-      answer: ''
+      answer: ['', Validators.required]
     });
   }
 
@@ -99,6 +105,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   addAnswer() {
     this.questionFormItemsArray.push(this.createAnswer());
+    console.log('asdasdsad');
+    setTimeout(() => {
+      const answerInputs = this.el.nativeElement.querySelectorAll('.answer-input');
+      console.log(answerInputs);
+      answerInputs[answerInputs.length - 1].focus();
+    }, 100);
   }
 
   removeAnswer(index) {
@@ -116,6 +128,33 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   changeColumn() {
     localStorage.setItem('column', this.column.value);
+  }
+
+  setIntro() {
+    let intro = IntroJs();
+    intro.setOptions({
+      steps: [
+        {
+          intro: 'Hoşgeldiniz.<br>Bu sayfanın kullanımı ile ilgili çok kısa bir özet geçmek istiyoruz. "Sonraki" butonuna tıklayarak başlayabilirsiniz.<br><br>(Bu kullanımı tekrar görmek isterseniz soru ekleme alanının altındaki "Kullanım sihirbazını aç" bağlantısına tıklayabilirsiniz.)'
+        },
+        {
+          element: '#school-info',
+          intro: 'Bu alan kağıdın en üstünde yer alacaktır. Doldurduktan sonra ok işaretine tıklayarak bu alanı küçültebilirsiniz.<br><br>Böylelikle soru ekleme bölümünü daha rahat kullanabilirsiniz.'
+        },
+        {
+          element: '#paper-column',
+          intro: 'Kağıt düzeni ayarı. Bir sütunda 1 soru veya bir sütunda 2 soru görüntülemek için bu seçenekleri kullanabilirsiniz.'
+        },
+        {
+          element: '#point-content',
+          intro: 'Bu yazıların üzerine tıklayarak değişiklik yapabilirsiniz.<br>Aynı şekilde eklediğiniz sorularıda bu şekilde düzenleyebilirsiniz.'
+        }
+      ]
+    });
+    intro.start();
+    document.querySelector('.introjs-nextbutton').innerHTML = 'Sonraki';
+    document.querySelector('.introjs-prevbutton').innerHTML = 'Önceki';
+    document.querySelector('.introjs-skipbutton').innerHTML = 'Atla';
   }
 
 }

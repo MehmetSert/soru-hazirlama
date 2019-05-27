@@ -3,7 +3,7 @@
     <div class="col-md-4 left">
       <div class="left-content">
         <mat-accordion>
-          <mat-expansion-panel [expanded]="true">
+          <mat-expansion-panel [expanded]="true" id="school-info">
             <mat-expansion-panel-header>
               <mat-panel-title>Okul - Ders Bilgileri</mat-panel-title>
               <mat-panel-description>Bu alanı küçültebilirsiniz.</mat-panel-description>
@@ -91,7 +91,7 @@
                 <div class="col-md-10" [formGroupName]="i">
                   <mat-form-field appearance="outline">
                     <mat-label>Şık</mat-label>
-                    <input matInput placeholder="Şık" formControlName="answer" autofocus>
+                    <input matInput placeholder="Şık" formControlName="answer" class="answer-input">
                     <span class="m-r-10" matPrefix>{{ questionForm.get('answerModel').value == 1 ? letters[i] : '( )' }}</span>
                   </mat-form-field>
                 </div>
@@ -108,17 +108,19 @@
         </mat-card>
         <div class="designer">
           <a href="https://limantech.com" target="_blank" matTooltip="Sınav sorularını hazırlarken öğretmenlerimize bir nebze faydamız dokunduysa ne mutlu bize :)" matTooltipClass="tooltip-14"><img src="https://www.limantech.com/icon.svg"></a>
+          <a href="#" class="m-l-25" (click)="setIntro()"><small>Kullanım sihirbazını aç</small></a>
         </div>
       </div>
     </div>
     <div class="col-md-8 paper-print">
       <div class="paper-content">
         <div class="paper-column">
-          <mat-button-toggle-group class="toggle-xs" name="column" aria-label="Sütun" #column="matButtonToggleGroup" value="2" (change)="changeColumn()">
+          <mat-button-toggle-group class="toggle-xs" name="column" aria-label="Sütun" #column="matButtonToggleGroup" value="2" (change)="changeColumn()" id="paper-column">
             <mat-button-toggle value="1" matTooltip="Bir satırda 1 soru görünür.">Tek sütun</mat-button-toggle>
             <mat-button-toggle value="2" matTooltip="Bir satırda 2 soru görünür.">2 sütun</mat-button-toggle>
           </mat-button-toggle-group>
           <small class="f-size-12">Düzeltmek istediğiniz soruları veya şıkları üzerine tıklayarak düzenleyebilirsiniz.</small>
+          <button mat-flat-button color="primary" (click)="done()" matTooltip="Direkt yazıcıya gönderebilirsiniz veya 'Hedef' bölümünü değiştirip 'PDF Kaydet' seçeneğini seçip kaydedebilirsiniz." matTooltipClass="tooltip-13">KAYDET VEYA YAZDIR</button>
         </div>
         <section class="paper">
           <h6 class="paper-title">
@@ -128,7 +130,7 @@
             {{ form.get('lessonName').value !== '' ? form.get('lessonName').value : '' }}
             {{ form.get('examName').value !== '' ? form.get('examName').value : '' }}
           </h6>
-          <div class="point-content">
+          <div class="point-content" id="point-content">
             <div class="point-content-left">
               <strong contenteditable="true">AD SOYAD:</strong>
               <strong contenteditable="true">NUMARA:</strong>
@@ -162,10 +164,7 @@
       </div>
       <div class="right">
         <div class="right-content">
-          <button mat-flat-button color="primary" class="m-b-15" (click)="done()" matTooltip="Direkt yazıcıya gönderebilirsiniz veya 'Hedef' bölümünü değiştirip 'PDF Kaydet' seçeneğini seçip kaydedebilirsiniz." matTooltipClass="tooltip-13">KAYDET VEYA YAZDIR</button>
-          <section class="google-160x600">
 
-          </section>
         </div>
       </div>
     </div>

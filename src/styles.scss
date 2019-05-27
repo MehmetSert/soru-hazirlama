@@ -5,6 +5,7 @@
 @import "~quill/dist/quill.core.css";
 @import "~quill/dist/quill.snow.css";
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~intro.js/minified/introjs.min.css";
 
 body {
   background-color: #f7f7f7;
@@ -21,15 +22,17 @@ body {
   position: absolute;
   left: -17px;
   top: -13px;
-  background-color: rgba(63, 81, 181, 0.2);
+  background-color: #ebedf7;
   padding: 5px 13px;
   border-radius: 50%;
   color: #141415;
   font-weight: 600;
+  box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
 }
 
 .paper-content {
-  width: 625px;
+  // width: 625px;
+  width: 21cm;
   display: inline-block;
   .paper-column {
     text-align: center;
@@ -45,7 +48,7 @@ body {
     font-size: 10pt;
     vertical-align: top;
     overflow-x: scroll;
-    height: calc(100vh - 59px);
+    min-height: 29.7cm;
     .paper-title {
       font-size: 10pt;
       text-align: center;
@@ -226,6 +229,16 @@ p-editor {
         box-shadow: 0 0 0 2px #000;
       }
     }
+  }
+}
+
+.introjs-tooltip {
+  .introjs-tooltiptext {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  .introjs-tooltipbuttons {
+    text-align: center;
   }
 }
 
